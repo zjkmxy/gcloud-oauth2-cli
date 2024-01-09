@@ -17,6 +17,7 @@ URL = (f'https://accounts.google.com/o/oauth2/v2/auth?'
        f'redirect_uri=http%3A%2F%2Flocalhost%3A8085%2F&'
        f'response_type=code&'
        f'client_id={CLIENT_ID}&'
+       f'nonce=MCowBQYDK2VwAyEA6qIwi5SOV3fj0T/Rqpi6lbqDh1hF93BIDG/2zkjG9Ec=&'
        f'access_type=offline')
 # Obtained from 'https://accounts.google.com/.well-known/openid-configuration#jwks_uri'
 GOOGLE_KEY_URL = 'https://www.googleapis.com/oauth2/v3/certs'
@@ -55,6 +56,7 @@ async def exchange_token(code: str):
                              algorithms=['RS256'],
                              audience=CLIENT_ID)
         print(payload)
+        print(f'\nNONCE: {payload['nonce']}\n')
         exit(0)
 
 
